@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>中青年冠心病患者社会疏离感调查问卷</title>
+<style>
+:root {
+  --bg: #f5f3f0;
+  --card: #fff;
+  --text: #3d3a35;
+  --muted: #8c8880;
+  --primary: #5b7a6f;
+  --primary-light: #e8f0ec;
+  --border: #e6e2dc;
+  --warn: #c0392b;
+  --shadow: 0 1px 3px rgba(0,0,0,.04), 0 1px 2px rgba(0,0,0,.02);
+}
+* { margin:0; padding:0; box-sizing:border-box; }
+body {
+  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+.container { max-width: 720px; margin: 0 auto; padding: 24px 16px 48px; }
+
+/* Header */
+.header {
+  text-align: center; padding: 32px 20px 24px;
+}
+.header h1 {
+  font-size: 22px; font-weight: 600; color: var(--text); letter-spacing: .02em;
+  margin-bottom: 6px;
+}
+.header .subtitle {
+  font-size: 13px; color: var(--muted);
+}
+
+/* Notice bar */
+.notice {
+  background: var(--primary-light); border-radius: 10px; padding: 18px 20px;
+  margin-bottom: 24px; font-size: 13.5px; color: #4a6459; line-height: 1.8;
+}
+.notice strong { color: #3d5a4c; }
+
+/* Progress */
+.progress-wrap {
+  position: sticky; top: 0; z-index: 100;
+  background: rgba(245,243,240,.92); backdrop-filter: blur(8px);
+  padding: 10px 16px; margin-bottom: 20px; border-radius: 10px;
+  display: flex; align-items: center; gap: 12px;
+}
+.progress-bar {
+  flex:1; height:4px; background: var(--border); border-radius:2px; overflow:hidden;
+}
+.progress-fill {
+  height:100%; background: var(--primary); border-radius:2px; transition: width .4s ease;
+}
+.progress-num { font-size: 12px; color: var(--muted); white-space: nowrap; font-variant-numeric: tabular-nums; }
+
+/* Card */
+.card {
+  background: var(--card); border-radius: 12px; padding: 28px 24px;
+  margin-bottom: 16px; box-shadow: var(--shadow);
+}
+.card h2 {
+  font-size: 17px; font-weight: 600; color: var(--text);
+  margin-bottom: 4px; display: flex; align-items: center; gap: 8px;
+}
+.card h2 .tag {
+  font-size: 11px; font-weight: 500; background: var(--primary-light);
+  color: #5b7a6f; padding: 2px 10px; border-radius: 10px; white-space: nowrap;
+}
+.card > .hint {
+  font-size: 12.5px; color: var(--muted); margin-bottom: 20px;
+}
+
+/* Question item */
+.q { padding: 14px 0; border-bottom: 1px solid #f2f0ec; }
+.q:last-child { border-bottom: none; }
+.q-label { font-size: 14px; font-weight: 500; margin-bottom: 8px; }
+.q-label .req { color: var(--warn); margin-left: 2px; }
+
+/* Options */
+.opts { display: flex; flex-wrap: wrap; gap: 10px; }
+.opt {
+  display: flex; align-items: center; gap: 5px; font-size: 14px; cursor: pointer;
+  padding: 7px 16px; border: 1px solid var(--border); border-radius: 20px;
+  transition: all .15s; user-select: none; background: #fafaf8;
+}
+.opt:hover { border-color: #b8c5be; background: #f8faf9; }
+.opt:has(input:checked) {
+  background: var(--primary-light); border-color: var(--primary); color: #3d5a4c;
+}
+.opt input { accent-color: var(--primary); }
+
+/* Inline inputs */
+.inline { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.inline input {
+  border: 1px solid var(--border); border-radius: 8px; padding: 9px 12px;
+  font-size: 14px; width: 100px; background: #fafaf8;
+  font-family: inherit; transition: border-color .15s;
+}
+.inline input:focus { outline: none; border-color: var(--primary); background: #fff; }
+.inline .unit { font-size: 13px; color: var(--muted); }
+
+/* Table */
+.likert { width: 100%; border-collapse: collapse; font-size: 13px; }
+.likert thead th {
+  background: #faf9f7; padding: 10px 6px; font-weight: 500; font-size: 12px;
+  color: var(--muted); border-bottom: 2px solid var(--border);
+  text-align: center; vertical-align: bottom; line-height: 1.3;
+}
+.likert thead th:first-child { width: 32px; }
+.likert thead th:nth-child(2) { text-align: left; }
+.likert tbody td {
+  padding: 9px 6px; border-bottom: 1px solid #f2f0ec; text-align: center;
+}
+.likert tbody td:nth-child(2) { text-align: left; }
+.likert tbody tr:hover { background: #fdfcfb; }
+.likert input[type="radio"] { accent-color: var(--primary); transform: scale(1.1); }
+
+/* Button */
+.btn-wrap { text-align: center; margin: 28px 0; }
+.btn {
+  display: inline-block; padding: 13px 56px; border: none; border-radius: 24px;
+  background: var(--primary); color: #fff; font-size: 15px; font-weight: 600;
+  cursor: pointer; letter-spacing: .05em; transition: all .2s;
+  font-family: inherit;
+}
+.btn:hover { opacity: .9; transform: translateY(-1px); box-shadow: 0 4px 12px rgba(91,122,111,.25); }
+.btn:disabled { background: #c4c0b8; cursor: not-allowed; transform: none; box-shadow: none; }
+
+/* Success */
+.done { display: none; text-align: center; padding: 48px 20px; }
+.done .check {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 64px; height: 64px; border-radius: 50%; background: #e8f0ec;
+  font-size: 32px; margin-bottom: 16px;
+}
+.done h2 { font-size: 20px; color: #3d5a4c; }
+.done p { color: var(--muted); margin-top: 8px; }
+
+/* Footer */
+.foot { text-align: center; font-size: 12px; color: #c4c0b8; padding: 16px; }
+
+/* Responsive */
+@media (max-width: 520px) {
+  .container { padding: 12px 10px 32px; }
+  .card { padding: 20px 14px; border-radius: 10px; }
+  .header h1 { font-size: 19px; }
+  .opt { padding: 6px 12px; font-size: 13px; }
+  .likert { font-size: 11px; }
+  .likert thead th { padding: 6px 2px; font-size: 10px; }
+  .likert tbody td { padding: 6px 2px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+
+<!-- Header -->
+<div class="header">
+  <h1>中青年冠心病患者社会疏离感<br>现状及影响因素调查问卷</h1>
+  <div class="subtitle">新乡医学院护理学院</div>
+</div>
+
+<!-- Notice -->
+<div class="notice">
+  <strong>尊敬的病友，您好！</strong><br>
+  本调查旨在了解中青年冠心病患者的社会疏离感现状，为临床护理提供参考，帮助患者更好地回归社会。本问卷<strong>匿名填写，信息仅用于学术研究，绝对保密</strong>。答案无对错之分，请根据您的真实情况作答。预计需要 <strong>10～15分钟</strong>，感谢您的支持！
+</div>
+
+<!-- Progress -->
+<div class="progress-wrap">
+  <span style="font-size:12px;font-weight:500;color:var(--muted);">完成度</span>
+  <div class="progress-bar"><div class="progress-fill" id="fill" style="width:0"></div></div>
+  <span class="progress-num" id="count">0 / 54</span>
+</div>
+
+<form id="form">
+
+<!-- ===== 第一部分 ===== -->
+<div class="card">
+<h2><span class="tag">一</span> 一般资料</h2>
+<div class="hint">请根据实际情况选择或填写（带 <span style="color:var(--warn);">*</span> 为必填）</div>
+
+<div class="q"><div class="q-label">1. 性别<span class="req">*</span></div><div class="opts"><label class="opt"><input type="radio" name="gender" required>男</label><label class="opt"><input type="radio" name="gender">女</label></div></div>
+
+<div class="q"><div class="q-label">2. 年龄<span class="req">*</span></div><div class="inline"><input type="number" name="age" min="18" max="60" placeholder="18～60" required> <span class="unit">岁</span></div></div>
+
+<div class="q"><div class="q-label">3. 身高 & 体重</div><div class="inline"><input type="number" name="height" min="100" max="250" placeholder="身高"> <span class="unit">cm</span> <input type="number" name="weight" min="30" max="200" placeholder="体重"> <span class="unit">kg</span> <span style="font-size:12px;color:var(--muted);">（BMI 由调查员计算）</span></div></div>
+
+<div class="q"><div class="q-label">4. 婚姻状况<span class="req">*</span></div><div class="opts"><label class="opt"><input type="radio" name="marital" required>已婚</label><label class="opt"><input type="radio" name="marital">未婚</label><label class="opt"><input type="radio" name="marital">离婚</label></div></div>
+
+<div class="q"><div class="q-label">5. 文化程度<span class="req">*</span></div><div class="opts"><label class="opt"><input type="radio" name="education" required>小学</label><label class="opt"><input type="radio" name="education">初中</label><label class="opt"><input type="radio" name="education">高中/中专</label><label class="opt"><input type="radio" name="education">大学及以上</label></div></div>
+
+<div class="q"><div class="q-label">6. 工作性质</div><div class="opts"><label class="opt"><input type="radio" name="job_type">体力劳动为主</label><label class="opt"><input type="radio" name="job_type">脑力劳动为主</label><label class="opt"><input type="radio" name="job_type">其他</label></div></div>
+
+<div class="q"><div class="q-label">7. 每周工作时间</div><div class="opts"><label class="opt"><input type="radio" name="work_hours">≤40h</label><label class="opt"><input type="radio" name="work_hours">41-50h</label><label class="opt"><input type="radio" name="work_hours">51-60h</label><label class="opt"><input type="radio" name="work_hours">>60h</label></div></div>
+
+<div class="q"><div class="q-label">8. 人均月收入<span class="req">*</span></div><div class="opts"><label class="opt"><input type="radio" name="income" required><2000元</label><label class="opt"><input type="radio" name="income">2000-5000元</label><label class="opt"><input type="radio" name="income">>5000元</label></div></div>
+
+<div class="q"><div class="q-label">9. 医疗支付方式</div><div class="opts"><label class="opt"><input type="radio" name="insurance">自费</label><label class="opt"><input type="radio" name="insurance">医疗保险</label><label class="opt"><input type="radio" name="insurance">新农合</label><label class="opt"><input type="radio" name="insurance">其他</label></div></div>
+
+<div class="q"><div class="q-label">10. 吸烟史</div><div class="opts"><label class="opt"><input type="radio" name="smoke">有</label><label class="opt"><input type="radio" name="smoke">无</label></div></div>
+<div class="q"><div class="q-label">11. 饮酒史</div><div class="opts"><label class="opt"><input type="radio" name="drink">有</label><label class="opt"><input type="radio" name="drink">无</label></div></div>
+<div class="q"><div class="q-label">12. 家族史（直系亲属冠心病）</div><div class="opts"><label class="opt"><input type="radio" name="family_history">有</label><label class="opt"><input type="radio" name="family_history">无</label></div></div>
+<div class="q"><div class="q-label">13. 高血压病史</div><div class="opts"><label class="opt"><input type="radio" name="hypertension">有</label><label class="opt"><input type="radio" name="hypertension">无</label></div></div>
+<div class="q"><div class="q-label">14. 糖尿病史</div><div class="opts"><label class="opt"><input type="radio" name="diabetes">有</label><label class="opt"><input type="radio" name="diabetes">无</label></div></div>
+<div class="q"><div class="q-label">15. 高脂血症史</div><div class="opts"><label class="opt"><input type="radio" name="hyperlipidemia">有</label><label class="opt"><input type="radio" name="hyperlipidemia">无</label></div></div>
+<div class="q"><div class="q-label">16. 合并高血压和糖尿病</div><div class="opts"><label class="opt"><input type="radio" name="htn_dm">有</label><label class="opt"><input type="radio" name="htn_dm">无</label></div></div>
+
+<div class="q"><div class="q-label">17. 冠心病确诊时间</div><div class="opts"><label class="opt"><input type="radio" name="duration"><6个月</label><label class="opt"><input type="radio" name="duration">6-12个月</label><label class="opt"><input type="radio" name="duration">>12个月</label></div></div>
+
+<div class="q"><div class="q-label">18. 目前用药数量</div><div class="opts"><label class="opt"><input type="radio" name="med_count">1-2种</label><label class="opt"><input type="radio" name="med_count">3-4种</label><label class="opt"><input type="radio" name="med_count">≥5种</label></div></div>
+
+<div class="q"><div class="q-label">19. 每周运动时长</div><div class="opts"><label class="opt"><input type="radio" name="exercise">从不</label><label class="opt"><input type="radio" name="exercise"><1h</label><label class="opt"><input type="radio" name="exercise">1-3h</label><label class="opt"><input type="radio" name="exercise">>3h</label></div></div>
+
+<div class="q"><div class="q-label">20. 每日睡眠时长</div><div class="opts"><label class="opt"><input type="radio" name="sleep"><6h</label><label class="opt"><input type="radio" name="sleep">6-8h</label><label class="opt"><input type="radio" name="sleep">>8h</label></div></div>
+
+<div class="q">
+  <div class="q-label">21. 能否主动获取疾病相关知识？</div>
+  <div class="opts" data-name="info_seek">
+    <label class="opt"><input type="radio" name="info_seek" value="yes" onchange="toggleSub('sub_info')">能</label>
+    <label class="opt"><input type="radio" name="info_seek" value="no" onchange="toggleSub('sub_info')">否</label>
+  </div>
+</div>
+<div class="q" id="sub_info" style="display:none">
+  <div class="q-label">22. 获取知识的主要途径（可多选）</div>
+  <div class="opts"><label class="opt"><input type="checkbox" name="info_source" value="手机">手机</label><label class="opt"><input type="checkbox" name="info_source" value="电视">电视</label><label class="opt"><input type="checkbox" name="info_source" value="医务人员">医务人员</label><label class="opt"><input type="checkbox" name="info_source" value="家属">家属</label><label class="opt"><input type="checkbox" name="info_source" value="病友">病友</label></div>
+</div>
+
+<div class="q">
+  <div class="q-label">23. 能否获得社会支持？</div>
+  <div class="opts">
+    <label class="opt"><input type="radio" name="social_support" value="yes" onchange="toggleSub('sub_support')">能</label>
+    <label class="opt"><input type="radio" name="social_support" value="no" onchange="toggleSub('sub_support')">否</label>
+  </div>
+</div>
+<div class="q" id="sub_support" style="display:none">
+  <div class="q-label">24. 支持主要来源（可多选）</div>
+  <div class="opts"><label class="opt"><input type="checkbox" name="support_from" value="家人">家人</label><label class="opt"><input type="checkbox" name="support_from" value="朋友">朋友</label><label class="opt"><input type="checkbox" name="support_from" value="同事">同事</label><label class="opt"><input type="checkbox" name="support_from" value="医务人员">医务人员</label></div>
+</div>
+</div>
+
+<!-- ===== 第二部分 GAS ===== -->
+<div class="card">
+<h2><span class="tag">二</span> 一般疏离感量表</h2>
+<div class="hint">请根据您的<strong>实际感受</strong>选择：1=非常不同意 &nbsp; 2=不同意 &nbsp; 3=同意 &nbsp; 4=非常同意</div>
+<table class="likert" id="gasTable"><thead><tr><th>#</th><th>题目</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead><tbody></tbody></table>
+</div>
+
+<!-- ===== 第三部分 GSES ===== -->
+<div class="card">
+<h2><span class="tag">三</span> 一般自我效能感量表</h2>
+<div class="hint">请根据您的<strong>实际感受</strong>选择：1=完全不正确 &nbsp; 2=有点正确 &nbsp; 3=多数正确 &nbsp; 4=完全正确</div>
+<table class="likert" id="gsesTable"><thead><tr><th>#</th><th>题目</th><th>1</th><th>2</th><th>3</th><th>4</th></tr></thead><tbody></tbody></table>
+</div>
+
+<!-- ===== 第四部分 Family ===== -->
+<div class="card">
+<h2><span class="tag">四</span> 家庭关怀度指数量表</h2>
+<div class="hint">请根据您对<strong>家人的实际感受</strong>选择：2=经常这样 &nbsp; 1=有时这样 &nbsp; 0=几乎很少</div>
+<table class="likert" id="famTable"><thead><tr><th>#</th><th>题目</th><th>2</th><th>1</th><th>0</th></tr></thead><tbody></tbody></table>
+</div>
+
+</form>
+
+<!-- Submit -->
+<div class="btn-wrap"><button class="btn" id="submitBtn" onclick="submitForm()">提交问卷</button></div>
+
+<!-- Success -->
+<div class="done" id="doneMsg">
+  <div class="check">&#10003;</div>
+  <h2>提交成功</h2>
+  <p>衷心感谢您的配合，祝您早日康复！</p>
+</div>
+
+<div class="foot">匿名调查 · 数据仅用于学术研究 · 新乡医学院护理学院</div>
+
+</div>
+
+<script>
+// Sub-question toggle
+function toggleSub(id) {
+  const el = document.getElementById(id);
+  if (el) el.style.display = 'block';
+}
+
+// Render all Likert tables
+(function(){
+  const gasItems = [
+    '我有时会感到我所认识的人，都并不怎么友善',
+    '我觉得家人并不像我想要的那样与我亲近',
+    '在大多数时间里，您都很难知道要怎么做，因为您不知道别人对自己的期望是什么',
+    '我经常感到自己无法参与别人正在做的事情',
+    '几乎没有人真正关心我的内心感受',
+    '有时我不能确定我到底是谁',
+    '我经常怀疑我是否会成为我想成为的人',
+    '与别人在一起时，我经常感到孤独寂寞',
+    '如果我真的有选择的话，那我会选择以一种与现在完全不同的方式来生活',
+    '如今当您遇到问题或需要别人帮助时，您很难指望他们',
+    '当我表现真正的我时，大多数人似乎都不太接受我',
+    '我经常发现自己很难投入到正在做的事情之中',
+    '对我来说，日常所做的事情大多数都很有价值、很有意义',
+    '当我认识的人遇到问题时，我有责任去帮助他们',
+    '我总是感觉我与其他朋友有很多的共同兴趣'
+  ];
+  const gsesItems = [
+    '如果我尽力去做的话，我总是能够解决问题的',
+    '即使别人反对我，我仍有办法取得我所要的',
+    '对我来说，坚持理想和达成目标是轻而易举的',
+    '我自信能有效地应付任何突如其来的事情',
+    '以我的才智，我定能应付意料之外的情况',
+    '如果我付出必要的努力，我一定能解决大多数难题',
+    '我能冷静地面对困难，因为我信赖自己处理问题的能力',
+    '面对一个难题时，我通常能找到几个解决方法',
+    '有麻烦的时候，我通常能想到一些应付的方法',
+    '无论什么事在我身上发生，我都能应付自如'
+  ];
+  const famItems = [
+    '当我遇到问题时，可以从家人得到满意的帮助',
+    '我很满意家人与我讨论各种事情以及分担问题的方式',
+    '当我希望从事新的活动或发展时，家人都能接受且给予支持',
+    '我很满意家人对我的情绪（喜、怒、哀、乐）表示关心和爱护的方式',
+    '我很满意家人与我共度时光的方式'
+  ];
+
+  function fillTable(tbody, items, cols, prefix) {
+    items.forEach((text, i) => {
+      const tr = document.createElement('tr');
+      tr.innerHTML = '<td>'+(i+1)+'</td><td>'+text+'</td>'+
+        Array.from({length:cols},(_,j)=>'<td><label class="opt" style="padding:4px 8px;border-radius:14px;"><input type="radio" name="'+prefix+'_'+(i+1)+'" value="'+(j+1)+'" required></label></td>').join('');
+      tbody.appendChild(tr);
+    });
+  }
+
+  fillTable(document.querySelector('#gasTable tbody'), gasItems, 4, 'gas');
+  fillTable(document.querySelector('#gsesTable tbody'), gsesItems, 4, 'gses');
+  fillTable(document.querySelector('#famTable tbody'), famItems, 3, 'fam');
+})();
+
+// Progress
+document.addEventListener('change', function(){
+  const total = 54;
+  const checked = document.querySelectorAll('input[type="radio"]:checked').length;
+  const pct = Math.round(checked / 54 * 100);
+  document.getElementById('fill').style.width = pct + '%';
+  document.getElementById('count').textContent = Math.round(checked/54*total) + ' / ' + total;
+});
+
+// Submit
+function submitForm(){
+  const allRadios = document.querySelectorAll('input[type="radio"][required]');
+  const groups = new Set();
+  allRadios.forEach(r => groups.add(r.name));
+  let missing = false;
+  groups.forEach(name => {
+    if (!document.querySelector('input[name="'+name+'"]:checked')) missing = true;
+  });
+  const age = document.querySelector('input[name="age"]');
+  if (!age.value || age.value<18 || age.value>60) missing = true;
+
+  if (missing) {
+    alert('请完成所有带 * 的必填题目后再提交。');
+    window.scrollTo({top:0,behavior:'smooth'});
+    return;
+  }
+
+  document.getElementById('submitBtn').style.display = 'none';
+  document.getElementById('doneMsg').style.display = 'block';
+  document.getElementById('doneMsg').scrollIntoView({behavior:'smooth'});
+
+  // Collect data
+  const data = {};
+  document.querySelectorAll('#form input:checked').forEach(el => {
+    if (data[el.name]) data[el.name] += ',' + el.value;
+    else data[el.name] = el.value;
+  });
+  document.querySelectorAll('#form input[type="number"]').forEach(el => {
+    if (el.value) data[el.name] = el.value;
+  });
+  console.log('问卷数据:', JSON.stringify(data, null, 2));
+}
+</script>
+</body>
+</html>
