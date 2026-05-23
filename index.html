@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>中青年冠心病患者社会疏离感调查问卷</title>
 <style>
-:root { --bg:#f4f6f9; --card:#fff; --text:#1a1a2e; --muted:#6b7280; --blue:#2563eb; --blue-light:#eff6ff; --border:#e5e7eb; --shadow:0 1px 3px rgba(0,0,0,.06); --red:#dc2626; }
+:root { --bg:#f4f6f9; --card:#fff; --text:#1a1a2e; --muted:#6b7280; --blue:#2563eb; --blue-light:#eff6ff; --border:#e5e7eb; --green:#16a34a; --red:#dc2626; }
 * { margin:0; padding:0; box-sizing:border-box; }
 body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--text); line-height:1.7; -webkit-font-smoothing:antialiased; }
 .container { max-width:720px; margin:0 auto; padding:20px 14px 48px; }
@@ -16,7 +16,6 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Mi
 
 .notice { background:var(--blue-light); border:1px solid #dbeafe; border-radius:10px; padding:16px 18px; margin-bottom:20px; font-size:13.5px; color:#1e40af; line-height:1.8; }
 
-/* Progress - sticky at top */
 .progress-wrap {
   position:sticky; top:0; z-index:100;
   background:rgba(255,255,255,.96); backdrop-filter:blur(8px);
@@ -28,7 +27,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Mi
 .progress-fill { height:100%; background:var(--blue); border-radius:3px; transition:width .35s ease; }
 .progress-num { font-size:13px; color:var(--text); white-space:nowrap; font-weight:700; }
 
-.card { background:var(--card); border-radius:12px; padding:26px 22px; margin-bottom:14px; box-shadow:var(--shadow); border:1px solid var(--border); }
+.card { background:var(--card); border-radius:12px; padding:26px 22px; margin-bottom:14px; box-shadow:0 1px 3px rgba(0,0,0,.06); border:1px solid var(--border); }
 .card h2 { font-size:16px; font-weight:700; color:var(--text); display:flex; align-items:center; gap:8px; margin-bottom:4px; }
 .card h2 .tag { font-size:11px; font-weight:600; background:var(--blue); color:#fff; padding:2px 10px; border-radius:10px; white-space:nowrap; }
 .card>.hint { font-size:12.5px; color:var(--muted); margin-bottom:18px; }
@@ -49,50 +48,44 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Mi
 .inline input:focus { outline:none; border-color:var(--blue); background:#fff; }
 .inline .unit { font-size:13px; color:var(--muted); }
 
-/* Likert item - responsive card style */
+/* Likert */
 .likert-item { padding:10px 0; border-bottom:1px solid #f3f4f6; }
 .likert-item:last-child { border-bottom:none; }
-.likert-item .li-num { font-size:12px; font-weight:700; color:var(--blue); min-width:22px; }
-.likert-item .li-text { font-size:13.5px; line-height:1.5; }
-.likert-item .li-opts { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
-.li-opt {
-  display:flex; align-items:center; gap:3px; font-size:12px; cursor:pointer;
-  padding:6px 12px; border:1.5px solid var(--border); border-radius:18px;
-  transition:all .15s; user-select:none; background:#fafbfc; white-space:nowrap;
-}
+.li-row { display:flex; align-items:flex-start; gap:8px; }
+.li-num { font-size:12px; font-weight:700; color:var(--blue); min-width:22px; }
+.li-text { font-size:13.5px; line-height:1.5; }
+.li-opts { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
+.li-opt { display:flex; align-items:center; gap:3px; font-size:12px; cursor:pointer; padding:6px 12px; border:1.5px solid var(--border); border-radius:18px; transition:all .15s; user-select:none; background:#fafbfc; white-space:nowrap; }
 .li-opt:hover { border-color:#93c5fd; background:#f0f7ff; }
 .li-opt:has(input:checked) { background:var(--blue-light); border-color:var(--blue); color:#1e40af; font-weight:600; }
 .li-opt input { accent-color:var(--blue); }
-.li-row { display:flex; align-items:flex-start; gap:8px; }
-.li-content { flex:1; }
-
-/* Likert header pill */
 .likert-header { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; padding:0 0 10px 0; border-bottom:1px solid var(--border); }
-.likert-header span { font-size:11px; color:var(--muted); background:#f8fafc; padding:3px 10px; border-radius:10px; white-space:nowrap; }
+.likert-header span { font-size:11px; color:var(--muted); background:#f8fafc; padding:3px 10px; border-radius:10px; }
 
 .btn-wrap { text-align:center; margin:28px 0; }
-.btn { display:inline-block; padding:13px 56px; border:none; border-radius:24px; background:var(--blue); color:#fff; font-size:15px; font-weight:700; cursor:pointer; transition:all .2s; font-family:inherit; }
+.btn { display:inline-block; padding:13px 36px; border:none; border-radius:24px; background:var(--blue); color:#fff; font-size:15px; font-weight:700; cursor:pointer; transition:all .2s; font-family:inherit; }
 .btn:hover { opacity:.92; transform:translateY(-1px); box-shadow:0 4px 14px rgba(37,99,235,.3); }
-.btn:disabled { background:#9ca3af; cursor:not-allowed; transform:none; box-shadow:none; }
+.btn-outline { background:#fff; color:var(--blue); border:2px solid var(--blue); }
+.btn-outline:hover { background:var(--blue-light); }
+.btn-sm { padding:8px 20px; font-size:13px; }
 
-/* Blessing page */
-.blessing { display:none; text-align:center; padding:40px 20px; }
-.blessing .b-icon { font-size:64px; margin-bottom:12px; }
-.blessing h2 { font-size:22px; color:var(--text); margin-bottom:8px; }
-.blessing .b-code {
-  display:inline-block; background:var(--blue-light); color:var(--blue);
-  padding:8px 20px; border-radius:20px; font-size:14px; font-weight:700;
-  margin:16px 0; letter-spacing:.05em;
-}
-.blessing .b-msg { font-size:15px; color:var(--text); line-height:2.2; margin:16px 0; }
-.blessing .b-emoji { font-size:28px; margin-top:8px; letter-spacing:6px; }
+/* Blessing */
+.blessing { display:none; text-align:center; padding:20px 0; }
+.b-icon { font-size:64px; margin-bottom:8px; }
+.b-code { display:inline-block; background:var(--blue-light); color:var(--blue); padding:8px 20px; border-radius:20px; font-size:15px; font-weight:700; margin:12px 0; letter-spacing:.05em; }
+.b-msg { font-size:15px; color:var(--text); line-height:2.2; margin:12px 0; }
+.b-emoji { font-size:28px; margin:8px 0 16px; letter-spacing:6px; }
+.data-box { background:#f8fafc; border:1px solid var(--border); border-radius:8px; padding:12px; margin:12px 0; text-align:left; font-size:11px; max-height:200px; overflow-y:auto; word-break:break-all; color:var(--muted); display:none; }
+
+/* Admin */
+.admin-panel { display:none; }
+.admin-panel table { width:100%; border-collapse:collapse; font-size:11px; margin-top:12px; }
+.admin-panel th,.admin-panel td { border:1px solid var(--border); padding:6px 8px; text-align:left; }
+.admin-panel th { background:#f8fafc; font-weight:600; white-space:nowrap; }
 
 .foot { text-align:center; font-size:11px; color:#9ca3af; padding:12px; }
-
-/* Error */
-.q.error { background:#fef2f2; border-radius:6px; padding-left:8px; padding-right:8px; }
-.q.error .q-label { color:var(--red); }
-.likert-item.error { background:#fef2f2; border-radius:6px; padding-left:6px; padding-right:6px; }
+.q.error,.likert-item.error { background:#fef2f2; border-radius:6px; padding-left:8px; padding-right:8px; }
+.q.error .q-label,.likert-item.error .li-text { color:var(--red); }
 
 @media(max-width:520px) {
   .container { padding:10px 8px 32px; }
@@ -107,7 +100,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Mi
 
 <div class="container">
 
-<!-- ======== FORM WRAPPER ======== -->
+<!-- ======== FORM ======== -->
 <div id="formWrapper">
 
 <div class="header">
@@ -120,8 +113,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Mi
   本调查旨在了解中青年冠心病患者的社会疏离感现状，为临床护理提供参考。问卷<strong>匿名填写，信息绝对保密</strong>，仅用于学术研究。答案无对错之分，请根据真实情况作答，约需 <strong>10～15分钟</strong>。感谢您！
 </div>
 
-<!-- Progress -->
-<div class="progress-wrap" id="progressBox">
+<div class="progress-wrap">
   <span style="font-size:11px;font-weight:600;color:var(--muted);">完成度</span>
   <div class="progress-bar"><div class="progress-fill" id="fill" style="width:0"></div></div>
   <span class="progress-num" id="count">0 / 53</span>
@@ -129,7 +121,6 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Mi
 
 <form id="form" novalidate>
 
-<!-- ===== 第一部分 ===== -->
 <div class="card" id="section1">
 <h2><span class="tag">一</span> 一般资料</h2>
 <div class="hint">请根据实际情况选择或填写（<span style="color:var(--red);">*</span> 为必填）</div>
@@ -138,7 +129,7 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Mi
 
 <div class="q" data-req="true"><div class="q-label">2. 年龄<span class="req">*</span></div><div class="opts"><label class="opt"><input type="radio" name="age" value="18～30岁" data-req="true">18～30岁</label><label class="opt"><input type="radio" name="age" value="31～40岁" data-req="true">31～40岁</label><label class="opt"><input type="radio" name="age" value="41～50岁" data-req="true">41～50岁</label><label class="opt"><input type="radio" name="age" value="51～60岁" data-req="true">51～60岁</label></div></div>
 
-<div class="q"><div class="q-label">3. 身高 & 体重</div><div class="inline"><input type="number" name="height" min="100" max="250" placeholder="身高"> <span class="unit">cm</span> <input type="number" name="weight" min="30" max="200" placeholder="体重"> <span class="unit">kg</span> <span style="font-size:12px;color:var(--muted);">（BMI 由调查员计算）</span></div></div>
+<div class="q"><div class="q-label">3. 身高 & 体重</div><div class="inline"><input type="number" name="height" min="100" max="250" placeholder="身高"> <span class="unit">cm</span> <input type="number" name="weight" min="30" max="200" placeholder="体重"> <span class="unit">kg</span></div></div>
 
 <div class="q" data-req="true"><div class="q-label">4. 婚姻状况<span class="req">*</span></div><div class="opts"><label class="opt"><input type="radio" name="marital" value="已婚" data-req="true">已婚</label><label class="opt"><input type="radio" name="marital" value="未婚" data-req="true">未婚</label><label class="opt"><input type="radio" name="marital" value="离婚" data-req="true">离婚</label></div></div>
 
@@ -154,46 +145,23 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Mi
 
 <div class="q"><div class="q-label">10. 吸烟史</div><div class="opts"><label class="opt"><input type="radio" name="smoke" value="有">有</label><label class="opt"><input type="radio" name="smoke" value="无">无</label></div></div>
 <div class="q"><div class="q-label">11. 饮酒史</div><div class="opts"><label class="opt"><input type="radio" name="drink" value="有">有</label><label class="opt"><input type="radio" name="drink" value="无">无</label></div></div>
-<div class="q"><div class="q-label">12. 家族史（直系亲属冠心病）</div><div class="opts"><label class="opt"><input type="radio" name="family_history" value="有">有</label><label class="opt"><input type="radio" name="family_history" value="无">无</label></div></div>
+<div class="q"><div class="q-label">12. 家族史</div><div class="opts"><label class="opt"><input type="radio" name="family_history" value="有">有</label><label class="opt"><input type="radio" name="family_history" value="无">无</label></div></div>
 <div class="q"><div class="q-label">13. 高血压病史</div><div class="opts"><label class="opt"><input type="radio" name="hypertension" value="有">有</label><label class="opt"><input type="radio" name="hypertension" value="无">无</label></div></div>
 <div class="q"><div class="q-label">14. 糖尿病史</div><div class="opts"><label class="opt"><input type="radio" name="diabetes" value="有">有</label><label class="opt"><input type="radio" name="diabetes" value="无">无</label></div></div>
 <div class="q"><div class="q-label">15. 高脂血症史</div><div class="opts"><label class="opt"><input type="radio" name="hyperlipidemia" value="有">有</label><label class="opt"><input type="radio" name="hyperlipidemia" value="无">无</label></div></div>
 <div class="q"><div class="q-label">16. 合并高血压和糖尿病</div><div class="opts"><label class="opt"><input type="radio" name="htn_dm" value="有">有</label><label class="opt"><input type="radio" name="htn_dm" value="无">无</label></div></div>
-
 <div class="q"><div class="q-label">17. 冠心病确诊时间</div><div class="opts"><label class="opt"><input type="radio" name="duration" value="<6个月"><6个月</label><label class="opt"><input type="radio" name="duration" value="6-12个月">6-12个月</label><label class="opt"><input type="radio" name="duration" value=">12个月">>12个月</label></div></div>
-
 <div class="q"><div class="q-label">18. 目前用药数量</div><div class="opts"><label class="opt"><input type="radio" name="med_count" value="1-2种">1-2种</label><label class="opt"><input type="radio" name="med_count" value="3-4种">3-4种</label><label class="opt"><input type="radio" name="med_count" value="≥5种">≥5种</label></div></div>
-
 <div class="q"><div class="q-label">19. 每周运动时长</div><div class="opts"><label class="opt"><input type="radio" name="exercise" value="从不">从不</label><label class="opt"><input type="radio" name="exercise" value="<1h"><1h</label><label class="opt"><input type="radio" name="exercise" value="1-3h">1-3h</label><label class="opt"><input type="radio" name="exercise" value=">3h">>3h</label></div></div>
-
 <div class="q"><div class="q-label">20. 每日睡眠时长</div><div class="opts"><label class="opt"><input type="radio" name="sleep" value="<6h"><6h</label><label class="opt"><input type="radio" name="sleep" value="6-8h">6-8h</label><label class="opt"><input type="radio" name="sleep" value=">8h">>8h</label></div></div>
 
-<div class="q">
-  <div class="q-label">21. 能否主动获取疾病相关知识？</div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="info_seek" value="是" onchange="toggleSub('sub_info',true)">能</label>
-    <label class="opt"><input type="radio" name="info_seek" value="否" onchange="toggleSub('sub_info',false)">否</label>
-  </div>
-</div>
-<div class="q" id="sub_info" style="display:none">
-  <div class="q-label">22. 获取知识的主要途径（可多选）</div>
-  <div class="opts"><label class="opt"><input type="checkbox" name="info_source" value="手机">手机</label><label class="opt"><input type="checkbox" name="info_source" value="电视">电视</label><label class="opt"><input type="checkbox" name="info_source" value="医务人员">医务人员</label><label class="opt"><input type="checkbox" name="info_source" value="家属">家属</label><label class="opt"><input type="checkbox" name="info_source" value="病友">病友</label></div>
+<div class="q"><div class="q-label">21. 能否主动获取疾病相关知识？</div><div class="opts"><label class="opt"><input type="radio" name="info_seek" value="是" onchange="toggleSub('sub_info',true)">能</label><label class="opt"><input type="radio" name="info_seek" value="否" onchange="toggleSub('sub_info',false)">否</label></div></div>
+<div class="q" id="sub_info" style="display:none"><div class="q-label">22. 获取知识的主要途径（可多选）</div><div class="opts"><label class="opt"><input type="checkbox" name="info_source" value="手机">手机</label><label class="opt"><input type="checkbox" name="info_source" value="电视">电视</label><label class="opt"><input type="checkbox" name="info_source" value="医务人员">医务人员</label><label class="opt"><input type="checkbox" name="info_source" value="家属">家属</label><label class="opt"><input type="checkbox" name="info_source" value="病友">病友</label></div></div>
+
+<div class="q"><div class="q-label">23. 能否获得社会支持？</div><div class="opts"><label class="opt"><input type="radio" name="social_support" value="是" onchange="toggleSub('sub_support',true)">能</label><label class="opt"><input type="radio" name="social_support" value="否" onchange="toggleSub('sub_support',false)">否</label></div></div>
+<div class="q" id="sub_support" style="display:none"><div class="q-label">24. 支持主要来源（可多选）</div><div class="opts"><label class="opt"><input type="checkbox" name="support_from" value="家人">家人</label><label class="opt"><input type="checkbox" name="support_from" value="朋友">朋友</label><label class="opt"><input type="checkbox" name="support_from" value="同事">同事</label><label class="opt"><input type="checkbox" name="support_from" value="医务人员">医务人员</label></div></div>
 </div>
 
-<div class="q">
-  <div class="q-label">23. 能否获得社会支持？</div>
-  <div class="opts">
-    <label class="opt"><input type="radio" name="social_support" value="是" onchange="toggleSub('sub_support',true)">能</label>
-    <label class="opt"><input type="radio" name="social_support" value="否" onchange="toggleSub('sub_support',false)">否</label>
-  </div>
-</div>
-<div class="q" id="sub_support" style="display:none">
-  <div class="q-label">24. 支持主要来源（可多选）</div>
-  <div class="opts"><label class="opt"><input type="checkbox" name="support_from" value="家人">家人</label><label class="opt"><input type="checkbox" name="support_from" value="朋友">朋友</label><label class="opt"><input type="checkbox" name="support_from" value="同事">同事</label><label class="opt"><input type="checkbox" name="support_from" value="医务人员">医务人员</label></div>
-</div>
-</div>
-
-<!-- ===== 第二部分 GAS ===== -->
 <div class="card" id="section2">
 <h2><span class="tag">二</span> 一般疏离感量表（GAS）</h2>
 <div class="hint">请根据<strong>实际感受</strong>选择最符合的选项。<span style="color:var(--red);">*</span> 每题必答</div>
@@ -201,7 +169,6 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Mi
 <div id="gasList"></div>
 </div>
 
-<!-- ===== 第三部分 GSES ===== -->
 <div class="card" id="section3">
 <h2><span class="tag">三</span> 一般自我效能感量表（GSES）</h2>
 <div class="hint">请根据<strong>实际感受</strong>选择最符合的选项。<span style="color:var(--red);">*</span> 每题必答</div>
@@ -209,7 +176,6 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Mi
 <div id="gsesList"></div>
 </div>
 
-<!-- ===== 第四部分 Family ===== -->
 <div class="card" id="section4">
 <h2><span class="tag">四</span> 家庭关怀度指数量表</h2>
 <div class="hint">请根据对<strong>家人的实际感受</strong>选择最符合的选项。<span style="color:var(--red);">*</span> 每题必答</div>
@@ -220,15 +186,14 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Mi
 </form>
 
 <div class="btn-wrap"><button class="btn" id="submitBtn" onclick="submitForm()">提交问卷</button></div>
-
 </div><!-- /formWrapper -->
 
-<!-- ======== BLESSING PAGE ======== -->
+<!-- ======== BLESSING ======== -->
 <div class="blessing" id="blessingPage">
-  <div class="card" style="max-width:500px;margin:0 auto;">
+  <div class="card">
     <div class="b-icon">&#128154;</div>
     <h2>提交成功</h2>
-    <p style="color:var(--muted);">您的问卷编号</p>
+    <p style="color:var(--muted);margin-top:4px;">您的问卷编号</p>
     <div class="b-code" id="surveyCode"></div>
     <div class="b-msg">
       愿您保持乐观心态，积极配合治疗<br>
@@ -239,210 +204,190 @@ body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Mi
   </div>
 </div>
 
-<div class="foot">匿名调查 · 数据仅用于学术研究 · 河南医药大学</div>
+<!-- ======== ADMIN PANEL (访问 ?admin 可见) ======== -->
+<div class="admin-panel" id="adminPanel">
+  <div class="card">
+    <h2>&#128202; 数据管理中心</h2>
+    <p style="font-size:13px;color:var(--muted);margin:8px 0;">
+      已收集 <strong id="adminCount">0</strong> 份问卷（本设备）
+    </p>
+    <div style="display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;">
+      <button class="btn btn-sm" onclick="downloadAllCSV()">下载全部 CSV（SPSS用）</button>
+      <button class="btn btn-sm btn-outline" onclick="downloadAllJSON()">下载全部 JSON</button>
+      <button class="btn btn-sm btn-outline" onclick="clearAllData()" style="color:var(--red);border-color:var(--red);">清空数据</button>
+    </div>
+    <div id="adminTable" style="overflow-x:auto;"></div>
+  </div>
+</div>
 
+<div class="foot">匿名调查 · 数据仅用于学术研究 · 河南医药大学</div>
 </div>
 
 <script>
+// ===== Toggle sub-questions =====
 function toggleSub(id,show){ var el=document.getElementById(id); if(el)el.style.display=show?'block':'none'; }
 
-// ===== Render Likert items as cards (no tables, no horizontal scroll) =====
+// ===== Likert items =====
 (function(){
-  var gasItems=[
-    '我有时会感到我所认识的人，都并不怎么友善',
-    '我觉得家人并不像我想要的那样与我亲近',
-    '在大多数时间里，您都很难知道要怎么做，因为您不知道别人对自己的期望是什么',
-    '我经常感到自己无法参与别人正在做的事情',
-    '几乎没有人真正关心我的内心感受',
-    '有时我不能确定我到底是谁',
-    '我经常怀疑我是否会成为我想成为的人',
-    '与别人在一起时，我经常感到孤独寂寞',
-    '如果我真的有选择的话，那我会选择以一种与现在完全不同的方式来生活',
-    '如今当您遇到问题或需要别人帮助时，您很难指望他们',
-    '当我表现真正的我时，大多数人似乎都不太接受我',
-    '我经常发现自己很难投入到正在做的事情之中',
-    '对我来说，日常所做的事情大多数都很有价值、很有意义',
-    '当我认识的人遇到问题时，我有责任去帮助他们',
-    '我总是感觉我与其他朋友有很多的共同兴趣'
-  ];
-  var gsesItems=[
-    '如果我尽力去做的话，我总是能够解决问题的',
-    '即使别人反对我，我仍有办法取得我所要的',
-    '对我来说，坚持理想和达成目标是轻而易举的',
-    '我自信能有效地应付任何突如其来的事情',
-    '以我的才智，我定能应付意料之外的情况',
-    '如果我付出必要的努力，我一定能解决大多数难题',
-    '我能冷静地面对困难，因为我信赖自己处理问题的能力',
-    '面对一个难题时，我通常能找到几个解决方法',
-    '有麻烦的时候，我通常能想到一些应付的方法',
-    '无论什么事在我身上发生，我都能应付自如'
-  ];
-  var famItems=[
-    '当我遇到问题时，可以从家人得到满意的帮助',
-    '我很满意家人与我讨论各种事情以及分担问题的方式',
-    '当我希望从事新的活动或发展时，家人都能接受且给予支持',
-    '我很满意家人对我的情绪（喜、怒、哀、乐）表示关心和爱护的方式',
-    '我很满意家人与我共度时光的方式'
-  ];
-
+  var gasItems=['我有时会感到我所认识的人，都并不怎么友善','我觉得家人并不像我想要的那样与我亲近','在大多数时间里，您都很难知道要怎么做，因为您不知道别人对自己的期望是什么','我经常感到自己无法参与别人正在做的事情','几乎没有人真正关心我的内心感受','有时我不能确定我到底是谁','我经常怀疑我是否会成为我想成为的人','与别人在一起时，我经常感到孤独寂寞','如果我真的有选择的话，那我会选择以一种与现在完全不同的方式来生活','如今当您遇到问题或需要别人帮助时，您很难指望他们','当我表现真正的我时，大多数人似乎都不太接受我','我经常发现自己很难投入到正在做的事情之中','对我来说，日常所做的事情大多数都很有价值、很有意义','当我认识的人遇到问题时，我有责任去帮助他们','我总是感觉我与其他朋友有很多的共同兴趣'];
+  var gsesItems=['如果我尽力去做的话，我总是能够解决问题的','即使别人反对我，我仍有办法取得我所要的','对我来说，坚持理想和达成目标是轻而易举的','我自信能有效地应付任何突如其来的事情','以我的才智，我定能应付意料之外的情况','如果我付出必要的努力，我一定能解决大多数难题','我能冷静地面对困难，因为我信赖自己处理问题的能力','面对一个难题时，我通常能找到几个解决方法','有麻烦的时候，我通常能想到一些应付的方法','无论什么事在我身上发生，我都能应付自如'];
+  var famItems=['当我遇到问题时，可以从家人得到满意的帮助','我很满意家人与我讨论各种事情以及分担问题的方式','当我希望从事新的活动或发展时，家人都能接受且给予支持','我很满意家人对我的情绪（喜、怒、哀、乐）表示关心和爱护的方式','我很满意家人与我共度时光的方式'];
   var gasLabels=['非常不同意','不同意','同意','非常同意'];
   var gsesLabels=['完全不正确','有点正确','多数正确','完全正确'];
   var famLabels=['经常这样','有时这样','几乎很少'];
   var famValues=[2,1,0];
 
-  function renderLikert(containerId, items, labels, prefix, values){
-    var container=document.getElementById(containerId);
-    items.forEach(function(text,i){
-      var div=document.createElement('div');
-      div.className='likert-item';
-      div.setAttribute('data-req','true');
-      var html='<div class="li-row">';
-      html+='<span class="li-num">'+(i+1)+'.</span>';
-      html+='<div class="li-content">';
-      html+='<div class="li-text">'+text+'</div>';
-      html+='<div class="li-opts">';
+  function renderLikert(id,items,labels,prefix,values){
+    var c=document.getElementById(id);
+    items.forEach(function(t,i){
+      var d=document.createElement('div'); d.className='likert-item'; d.setAttribute('data-req','true');
+      var h='<div class="li-row"><span class="li-num">'+(i+1)+'.</span><div class="li-content"><div class="li-text">'+t+'</div><div class="li-opts">';
       for(var j=0;j<labels.length;j++){
-        var val=(values&&values[j]!==undefined)?values[j]:(j+1);
-        html+='<label class="li-opt">'+labels[j]+'<input type="radio" name="'+prefix+'_'+(i+1)+'" value="'+val+'" data-req="true"></label>';
+        var v=(values&&values[j]!==undefined)?values[j]:(j+1);
+        h+='<label class="li-opt">'+labels[j]+'<input type="radio" name="'+prefix+'_'+(i+1)+'" value="'+v+'" data-req="true"></label>';
       }
-      html+='</div></div></div>';
-      div.innerHTML=html;
-      container.appendChild(div);
+      h+='</div></div></div>'; d.innerHTML=h; c.appendChild(d);
     });
   }
-
-  renderLikert('gasList', gasItems, gasLabels, 'gas');
-  renderLikert('gsesList', gsesItems, gsesLabels, 'gses');
-  renderLikert('famList', famItems, famLabels, 'fam', famValues);
+  renderLikert('gasList',gasItems,gasLabels,'gas');
+  renderLikert('gsesList',gsesItems,gsesLabels,'gses');
+  renderLikert('famList',famItems,famLabels,'fam',famValues);
 })();
 
-// ===== Progress: count ALL radio groups + text inputs =====
-// Radio groups: 21 (section1) + 15 (gas) + 10 (gses) + 5 (fam) = 51 radio groups
-// Text inputs: height, weight = 2
-// TOTAL = 53
+// ===== Progress =====
+var TOTAL=53;
+function calcProgress(){
+  var groups={};
+  document.querySelectorAll('input[type="radio"]:checked').forEach(function(r){ groups[r.name]=true; });
+  var h=document.querySelector('input[name="height"]');
+  var w=document.querySelector('input[name="weight"]');
+  return Object.keys(groups).length+(h&&h.value?1:0)+(w&&w.value?1:0);
+}
+document.addEventListener('change',function(){
+  var d=calcProgress();
+  document.getElementById('fill').style.width=Math.min(Math.round(d/TOTAL*100),100)+'%';
+  document.getElementById('count').textContent=d+' / '+TOTAL;
+});
 
-var TOTAL_ITEMS = 53;
+// ===== Data columns (match SPSS headers) =====
+var COLUMNS=['code','gender','age','height','weight','marital','education','job_type','work_hours','income','insurance','smoke','drink','family_history','hypertension','diabetes','hyperlipidemia','htn_dm','duration','med_count','exercise','sleep','info_seek','info_source','social_support','support_from','gas_1','gas_2','gas_3','gas_4','gas_5','gas_6','gas_7','gas_8','gas_9','gas_10','gas_11','gas_12','gas_13','gas_14','gas_15','gses_1','gses_2','gses_3','gses_4','gses_5','gses_6','gses_7','gses_8','gses_9','gses_10','fam_1','fam_2','fam_3','fam_4','fam_5'];
 
-function calcProgress() {
-  var checkedGroups = {};
-  document.querySelectorAll('input[type="radio"]:checked').forEach(function(r){
-    checkedGroups[r.name] = true;
+function collectData(code){
+  var d={code:code};
+  document.querySelectorAll('#form input:checked').forEach(function(el){ d[el.name]=d[el.name]?d[el.name]+','+el.value:el.value; });
+  document.querySelectorAll('#form input[type="number"]').forEach(function(el){ if(el.value)d[el.name]=el.value; });
+  return d;
+}
+
+// ===== CSV helpers =====
+function toCSV(rows){
+  var header=COLUMNS.join('\t');
+  var lines=[header];
+  rows.forEach(function(r){
+    var vals=COLUMNS.map(function(c){ var v=r[c]||''; return String(v).replace(/\t/g,' ').replace(/\n/g,' '); });
+    lines.push(vals.join('\t'));
   });
-  var radioDone = Object.keys(checkedGroups).length;
-
-  var h = document.querySelector('input[name="height"]');
-  var w = document.querySelector('input[name="weight"]');
-  var textDone = (h && h.value ? 1 : 0) + (w && w.value ? 1 : 0);
-
-  return radioDone + textDone;
+  return lines.join('\n');
+}
+function downloadBlob(content,filename,type){
+  var blob=new Blob(['﻿'+content],{type:type||'text/csv;charset=utf-8'});
+  var a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=filename; a.click();
 }
 
-document.addEventListener('change', updateProgress);
-function updateProgress(){
-  var done = calcProgress();
-  var pct = Math.min(Math.round(done / TOTAL_ITEMS * 100), 100);
-  document.getElementById('fill').style.width = pct + '%';
-  document.getElementById('count').textContent = done + ' / ' + TOTAL_ITEMS;
-}
+// ===== localStorage helpers =====
+var STORAGE_KEY='chd_survey_data';
+function getStored(){ try{return JSON.parse(localStorage.getItem(STORAGE_KEY)||'[]');}catch(e){return[];} }
+function addStored(row){ var d=getStored(); d.push(row); localStorage.setItem(STORAGE_KEY,JSON.stringify(d)); return d; }
 
-// ===== Build required-group -> label map =====
+// ===== Submit =====
 function buildReqMap(){
-  var map = {};
+  var map={};
   document.querySelectorAll('input[data-req="true"]').forEach(function(r){
-    if (map[r.name]) return;
-    var label = r.name;
-    var qDiv = r.closest('.q');
-    if (qDiv) {
-      var lbl = qDiv.querySelector('.q-label');
-      if (lbl) label = lbl.textContent.replace(/\*/g,'').trim();
-    }
-    if (!qDiv) {
-      var li = r.closest('.likert-item');
-      if (li) {
-        var card = li.closest('.card');
-        var numEl = li.querySelector('.li-num');
-        var num = numEl ? numEl.textContent.replace('.','') : '';
-        var cardTitle = card ? card.querySelector('h2').textContent.trim() : '';
-        label = cardTitle + ' 第' + num + '题';
-      }
-    }
-    map[r.name] = label;
+    if(map[r.name])return;
+    var label=r.name;
+    var qDiv=r.closest('.q');
+    if(qDiv){var lbl=qDiv.querySelector('.q-label');if(lbl)label=lbl.textContent.replace(/\*/g,'').trim();}
+    if(!qDiv){var li=r.closest('.likert-item');if(li){var card=li.closest('.card');var numEl=li.querySelector('.li-num');var num=numEl?numEl.textContent.replace('.',''):'';var t=card?card.querySelector('h2').textContent.trim():'';label=t+' 第'+num+'题';}}
+    map[r.name]=label;
   });
   return map;
 }
 
-// ===== Submit =====
 function submitForm(){
-  var reqMap = buildReqMap();
-  var checkedGroups = {};
-  document.querySelectorAll('input[type="radio"]:checked').forEach(function(r){
-    checkedGroups[r.name] = true;
-  });
+  var reqMap=buildReqMap();
+  var checked={};
+  document.querySelectorAll('input[type="radio"]:checked').forEach(function(r){checked[r.name]=true;});
+  var all={};
+  document.querySelectorAll('input[data-req="true"]').forEach(function(r){all[r.name]=true;});
+  var missing=[];
+  Object.keys(all).forEach(function(n){if(!checked[n])missing.push({name:n,label:reqMap[n]||n});});
+  document.querySelectorAll('.q.error,.likert-item.error').forEach(function(el){el.classList.remove('error');});
 
-  var allGroups = {};
-  document.querySelectorAll('input[data-req="true"]').forEach(function(r){
-    allGroups[r.name] = true;
-  });
-
-  var missing = [];
-  Object.keys(allGroups).forEach(function(name){
-    if (!checkedGroups[name]) {
-      missing.push({ name: name, label: reqMap[name] || name });
-    }
-  });
-
-  // Check age is still a required radio now, so this is auto-covered
-  // But we have no number-required items to check separately
-
-  // Clear errors
-  document.querySelectorAll('.q.error,.likert-item.error').forEach(function(el){ el.classList.remove('error'); });
-
-  if (missing.length > 0) {
-    missing.forEach(function(m){
-      var el = document.querySelector('input[name="'+m.name+'"]');
-      if (el) {
-        var container = el.closest('.q') || el.closest('.likert-item');
-        if (container) container.classList.add('error');
-      }
-    });
-    var msg = '以下 ' + missing.length + ' 道必答题尚未完成：\n\n';
-    missing.forEach(function(m,i){ msg += (i+1) + '. ' + m.label + '\n'; });
+  if(missing.length>0){
+    missing.forEach(function(m){var el=document.querySelector('input[name="'+m.name+'"]');if(el){var c=el.closest('.q')||el.closest('.likert-item');if(c)c.classList.add('error');}});
+    var msg='以下 '+missing.length+' 道必答题尚未完成：\n\n';
+    missing.forEach(function(m,i){msg+=(i+1)+'. '+m.label+'\n';});
     alert(msg);
-    var first = document.querySelector('input[name="'+missing[0].name+'"]');
-    if (first) {
-      var card = first.closest('.card');
-      if (card) card.scrollIntoView({ behavior:'smooth', block:'center' });
-    }
+    var first=document.querySelector('input[name="'+missing[0].name+'"]');
+    if(first){(first.closest('.card')||first).scrollIntoView({behavior:'smooth',block:'center'});}
     return;
   }
 
-  // Generate survey code
-  var now = new Date();
-  var code = 'CHD-' +
-    now.getFullYear() +
-    String(now.getMonth()+1).padStart(2,'0') +
-    String(now.getDate()).padStart(2,'0') + '-' +
-    String(Math.floor(Math.random()*9000)+1000);
-  document.getElementById('surveyCode').textContent = code;
+  // Generate code
+  var now=new Date();
+  var code='CHD-'+now.getFullYear()+String(now.getMonth()+1).padStart(2,'0')+String(now.getDate()).padStart(2,'0')+'-'+String(Math.floor(Math.random()*9000)+1000);
 
-  // Collect data
-  var data = { code: code };
-  document.querySelectorAll('#form input:checked').forEach(function(el){
-    data[el.name] = data[el.name] ? data[el.name] + ',' + el.value : el.value;
-  });
-  document.querySelectorAll('#form input[type="number"]').forEach(function(el){
-    if (el.value) data[el.name] = el.value;
-  });
-  console.log('问卷数据:', JSON.stringify(data, null, 2));
+  // Collect & store
+  var data=collectData(code);
+  addStored(data);
+  console.log('问卷数据:',JSON.stringify(data,null,2));
 
-  // Hide form, show blessing
-  document.getElementById('formWrapper').style.display = 'none';
-  document.getElementById('blessingPage').style.display = 'block';
-  document.getElementById('blessingPage').scrollIntoView({ behavior:'smooth' });
+  // Show blessing
+  document.getElementById('surveyCode').textContent=code;
+  document.getElementById('formWrapper').style.display='none';
+  document.getElementById('blessingPage').style.display='block';
+  document.getElementById('blessingPage').scrollIntoView({behavior:'smooth'});
 }
 
-updateProgress();
-</script>
+// ===== ADMIN PANEL =====
+function downloadAllCSV(){
+  var rows=getStored();
+  if(rows.length===0){alert('暂无数据');return;}
+  downloadBlob(toCSV(rows),'问卷数据_'+new Date().toISOString().slice(0,10)+'.csv');
+}
+function downloadAllJSON(){
+  var rows=getStored();
+  if(rows.length===0){alert('暂无数据');return;}
+  downloadBlob(JSON.stringify(rows,null,2),'问卷数据_'+new Date().toISOString().slice(0,10)+'.json','application/json');
+}
+function clearAllData(){
+  if(confirm('确定要清空本设备上所有问卷数据吗？此操作不可恢复！\n\n建议先下载 CSV 备份。')){
+    localStorage.removeItem(STORAGE_KEY);
+    alert('已清空');
+    location.reload();
+  }
+}
 
+// Init admin if ?admin
+if(location.search.indexOf('admin')>-1){
+  document.getElementById('formWrapper').style.display='none';
+  document.getElementById('adminPanel').style.display='block';
+  var rows=getStored();
+  document.getElementById('adminCount').textContent=rows.length;
+  if(rows.length>0){
+    var cols=COLUMNS;
+    var html='<table><thead><tr><th>#</th>';
+    cols.forEach(function(c){html+='<th>'+c+'</th>';});
+    html+='</tr></thead><tbody>';
+    rows.forEach(function(r,i){
+      html+='<tr><td>'+(i+1)+'</td>';
+      cols.forEach(function(c){html+='<td>'+(r[c]||'')+'</td>';});
+      html+='</tr>';
+    });
+    html+='</tbody></table>';
+    document.getElementById('adminTable').innerHTML=html;
+  }
+}
+</script>
 </body>
 </html>
