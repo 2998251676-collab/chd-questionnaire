@@ -360,6 +360,11 @@ function submitForm(){
   msg+='\n— 家庭关怀度 —\n';
   for(i=1;i<=5;i++){ msg+='Q'+(24+15+10+i)+': '+(data['fam_'+i]||'未填')+'  '; }
 
+  // TSV line for easy data extraction
+  var allKeys=COLUMNS;
+  var tsvLine=allKeys.map(function(k){ return data[k]||''; }).join('\t');
+  msg+='\n\n[DATA]'+tsvLine;
+
   fetch(FEISHU_URL,{
     method:'POST',
     headers:{'Content-Type':'application/json'},
