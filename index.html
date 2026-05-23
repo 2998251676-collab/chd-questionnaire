@@ -340,13 +340,31 @@ function submitForm(){
   // Collect & store
   var data=collectData(code);
   addStored(data);
-  console.log('问卷数据:',JSON.stringify(data,null,2));
 
-  // Show blessing
+  // Show blessing immediately
   document.getElementById('surveyCode').textContent=code;
   document.getElementById('formWrapper').style.display='none';
   document.getElementById('blessingPage').style.display='block';
   document.getElementById('blessingPage').scrollIntoView({behavior:'smooth'});
+
+  // Send to Feishu webhook (async, don't block UI)
+  var FEISHU_URL='https://open.feishu.cn/open-apis/bot/v2/hook/374a22b3-8365-4906-87f6-d88e784454b5';
+  var fields=['性别','年龄','身高','体重','婚姻状况','文化程度','工作性质','每日工作时间','人均月收入','医疗支付方式','吸烟史','饮酒史','家族史','高血压病史','糖尿病史','高脂血症史','合并高血压和糖尿病','确诊时间','用药数量','运动时长','睡眠时长','获取知识','知识途径','社会支持','支持来源'];
+  var fieldKeys=['gender','age','height','weight','marital','education','job_type','work_hours','income','insurance','smoke','drink','family_history','hypertension','diabetes','hyperlipidemia','htn_dm','duration','med_count','exercise','sleep','info_seek','info_source','social_support','support_from'];
+  var msg='📋 '+code+'\n';
+  fields.forEach(function(f,i){ msg+=f+': '+(data[fieldKeys[i]]||'未填')+'\n'; });
+  msg+='\n— GAS —\n';
+  for(var i=1;i<=15;i++){ msg+='Q'+(24+i)+': '+(data['gas_'+i]||'未填')+'  '; if(i%5===0)msg+='\n'; }
+  msg+='\n— GSES —\n';
+  for(i=1;i<=10;i++){ msg+='Q'+(24+15+i)+': '+(data['gses_'+i]||'未填')+'  '; if(i%5===0)msg+='\n'; }
+  msg+='\n— 家庭关怀度 —\n';
+  for(i=1;i<=5;i++){ msg+='Q'+(24+15+10+i)+': '+(data['fam_'+i]||'未填')+'  '; }
+
+  fetch(FEISHU_URL,{
+    method:'POST',
+    headers:{'Content-Type':'application/json'},
+    body:JSON.stringify({msg_type:'text',content:{text:msg}})
+  }).then(function(r){ console.log('飞书发送:',r.ok?'成功':'失败'); }).catch(function(e){ console.log('飞书发送失败:',e); });
 }
 
 // ===== ADMIN PANEL =====
