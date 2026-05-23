@@ -5,138 +5,110 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>中青年冠心病患者社会疏离感调查问卷</title>
 <style>
-:root {
-  --bg: #f4f6f9;
-  --card: #fff;
-  --text: #1a1a2e;
-  --muted: #6b7280;
-  --blue: #2563eb;
-  --blue-light: #eff6ff;
-  --border: #e5e7eb;
-  --shadow: 0 1px 3px rgba(0,0,0,.06);
-  --red: #dc2626;
-}
+:root { --bg:#f4f6f9; --card:#fff; --text:#1a1a2e; --muted:#6b7280; --blue:#2563eb; --blue-light:#eff6ff; --border:#e5e7eb; --shadow:0 1px 3px rgba(0,0,0,.06); --red:#dc2626; }
 * { margin:0; padding:0; box-sizing:border-box; }
-body {
-  font-family: -apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;
-  background: var(--bg); color: var(--text); line-height: 1.7;
-  -webkit-font-smoothing: antialiased;
-}
-.container { max-width: 720px; margin: 0 auto; padding: 20px 14px 48px; }
+body { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif; background:var(--bg); color:var(--text); line-height:1.7; -webkit-font-smoothing:antialiased; }
+.container { max-width:720px; margin:0 auto; padding:20px 14px 48px; }
 
-.header { text-align: center; padding: 28px 16px 20px; }
-.header h1 { font-size: 21px; font-weight: 700; color: var(--text); }
-.header .sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
+.header { text-align:center; padding:28px 16px 20px; }
+.header h1 { font-size:21px; font-weight:700; color:var(--text); }
+.header .sub { font-size:13px; color:var(--muted); margin-top:4px; }
 
-.notice {
-  background: var(--blue-light); border: 1px solid #dbeafe; border-radius: 10px;
-  padding: 16px 18px; margin-bottom: 20px; font-size: 13.5px; color: #1e40af; line-height: 1.8;
-}
+.notice { background:var(--blue-light); border:1px solid #dbeafe; border-radius:10px; padding:16px 18px; margin-bottom:20px; font-size:13.5px; color:#1e40af; line-height:1.8; }
 
+/* Progress - sticky at top */
 .progress-wrap {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(244,246,249,.94); backdrop-filter: blur(8px);
-  padding: 10px 16px; margin-bottom: 16px; border-radius: 10px;
-  display: flex; align-items: center; gap: 10px;
-  border: 1px solid var(--border);
+  position:sticky; top:0; z-index:100;
+  background:rgba(255,255,255,.96); backdrop-filter:blur(8px);
+  padding:12px 16px; margin-bottom:16px; border-radius:10px;
+  display:flex; align-items:center; gap:10px;
+  border:1px solid var(--border); box-shadow:0 1px 6px rgba(0,0,0,.04);
 }
-.progress-bar { flex:1; height:5px; background:var(--border); border-radius:3px; overflow:hidden; }
-.progress-fill { height:100%; background:var(--blue); border-radius:3px; transition: width .35s ease; }
-.progress-num { font-size: 12px; color: var(--muted); white-space: nowrap; font-weight: 500; }
+.progress-bar { flex:1; height:6px; background:var(--border); border-radius:3px; overflow:hidden; }
+.progress-fill { height:100%; background:var(--blue); border-radius:3px; transition:width .35s ease; }
+.progress-num { font-size:13px; color:var(--text); white-space:nowrap; font-weight:700; }
 
-.card {
-  background: var(--card); border-radius: 12px; padding: 26px 22px;
-  margin-bottom: 14px; box-shadow: var(--shadow); border: 1px solid var(--border);
+.card { background:var(--card); border-radius:12px; padding:26px 22px; margin-bottom:14px; box-shadow:var(--shadow); border:1px solid var(--border); }
+.card h2 { font-size:16px; font-weight:700; color:var(--text); display:flex; align-items:center; gap:8px; margin-bottom:4px; }
+.card h2 .tag { font-size:11px; font-weight:600; background:var(--blue); color:#fff; padding:2px 10px; border-radius:10px; white-space:nowrap; }
+.card>.hint { font-size:12.5px; color:var(--muted); margin-bottom:18px; }
+
+.q { padding:12px 0; border-bottom:1px solid #f3f4f6; }
+.q:last-child { border-bottom:none; }
+.q-label { font-size:13.5px; font-weight:600; margin-bottom:7px; color:var(--text); }
+.q-label .req { color:var(--red); }
+
+.opts { display:flex; flex-wrap:wrap; gap:8px; }
+.opt { display:flex; align-items:center; gap:5px; font-size:13px; cursor:pointer; padding:7px 15px; border:1.5px solid var(--border); border-radius:20px; transition:all .15s; user-select:none; background:#fafbfc; }
+.opt:hover { border-color:#93c5fd; background:#f0f7ff; }
+.opt:has(input:checked) { background:var(--blue-light); border-color:var(--blue); color:#1e40af; }
+.opt input { accent-color:var(--blue); }
+
+.inline { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.inline input { border:1.5px solid var(--border); border-radius:8px; padding:8px 12px; font-size:14px; width:100px; background:#fafbfc; font-family:inherit; transition:border-color .15s; }
+.inline input:focus { outline:none; border-color:var(--blue); background:#fff; }
+.inline .unit { font-size:13px; color:var(--muted); }
+
+/* Likert item - responsive card style */
+.likert-item { padding:10px 0; border-bottom:1px solid #f3f4f6; }
+.likert-item:last-child { border-bottom:none; }
+.likert-item .li-num { font-size:12px; font-weight:700; color:var(--blue); min-width:22px; }
+.likert-item .li-text { font-size:13.5px; line-height:1.5; }
+.likert-item .li-opts { display:flex; flex-wrap:wrap; gap:6px; margin-top:6px; }
+.li-opt {
+  display:flex; align-items:center; gap:3px; font-size:12px; cursor:pointer;
+  padding:6px 12px; border:1.5px solid var(--border); border-radius:18px;
+  transition:all .15s; user-select:none; background:#fafbfc; white-space:nowrap;
 }
-.card h2 { font-size: 16px; font-weight: 700; color: var(--text); display: flex; align-items: center; gap: 8px; margin-bottom: 4px; }
-.card h2 .tag {
-  font-size: 11px; font-weight: 600; background: var(--blue); color: #fff;
-  padding: 2px 10px; border-radius: 10px; white-space: nowrap;
+.li-opt:hover { border-color:#93c5fd; background:#f0f7ff; }
+.li-opt:has(input:checked) { background:var(--blue-light); border-color:var(--blue); color:#1e40af; font-weight:600; }
+.li-opt input { accent-color:var(--blue); }
+.li-row { display:flex; align-items:flex-start; gap:8px; }
+.li-content { flex:1; }
+
+/* Likert header pill */
+.likert-header { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:12px; padding:0 0 10px 0; border-bottom:1px solid var(--border); }
+.likert-header span { font-size:11px; color:var(--muted); background:#f8fafc; padding:3px 10px; border-radius:10px; white-space:nowrap; }
+
+.btn-wrap { text-align:center; margin:28px 0; }
+.btn { display:inline-block; padding:13px 56px; border:none; border-radius:24px; background:var(--blue); color:#fff; font-size:15px; font-weight:700; cursor:pointer; transition:all .2s; font-family:inherit; }
+.btn:hover { opacity:.92; transform:translateY(-1px); box-shadow:0 4px 14px rgba(37,99,235,.3); }
+.btn:disabled { background:#9ca3af; cursor:not-allowed; transform:none; box-shadow:none; }
+
+/* Blessing page */
+.blessing { display:none; text-align:center; padding:40px 20px; }
+.blessing .b-icon { font-size:64px; margin-bottom:12px; }
+.blessing h2 { font-size:22px; color:var(--text); margin-bottom:8px; }
+.blessing .b-code {
+  display:inline-block; background:var(--blue-light); color:var(--blue);
+  padding:8px 20px; border-radius:20px; font-size:14px; font-weight:700;
+  margin:16px 0; letter-spacing:.05em;
 }
-.card > .hint { font-size: 12.5px; color: var(--muted); margin-bottom: 18px; }
+.blessing .b-msg { font-size:15px; color:var(--text); line-height:2.2; margin:16px 0; }
+.blessing .b-emoji { font-size:28px; margin-top:8px; letter-spacing:6px; }
 
-.q { padding: 12px 0; border-bottom: 1px solid #f3f4f6; }
-.q:last-child { border-bottom: none; }
-.q-label { font-size: 13.5px; font-weight: 600; margin-bottom: 7px; color: var(--text); }
-.q-label .req { color: var(--red); }
+.foot { text-align:center; font-size:11px; color:#9ca3af; padding:12px; }
 
-.opts { display: flex; flex-wrap: wrap; gap: 8px; }
-.opt {
-  display: flex; align-items: center; gap: 5px; font-size: 13px; cursor: pointer;
-  padding: 7px 15px; border: 1.5px solid var(--border); border-radius: 20px;
-  transition: all .15s; user-select: none; background: #fafbfc;
-}
-.opt:hover { border-color: #93c5fd; background: #f0f7ff; }
-.opt:has(input:checked) { background: var(--blue-light); border-color: var(--blue); color: #1e40af; }
-.opt input { accent-color: var(--blue); }
+/* Error */
+.q.error { background:#fef2f2; border-radius:6px; padding-left:8px; padding-right:8px; }
+.q.error .q-label { color:var(--red); }
+.likert-item.error { background:#fef2f2; border-radius:6px; padding-left:6px; padding-right:6px; }
 
-.inline { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
-.inline input {
-  border: 1.5px solid var(--border); border-radius: 8px; padding: 8px 12px;
-  font-size: 14px; width: 100px; background: #fafbfc; font-family: inherit; transition: border-color .15s;
-}
-.inline input:focus { outline: none; border-color: var(--blue); background: #fff; }
-.inline .unit { font-size: 13px; color: var(--muted); }
-
-/* Likert table */
-.likert-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-.likert { width: 100%; border-collapse: collapse; font-size: 13px; min-width: 600px; }
-.likert thead th {
-  background: #f8fafc; padding: 10px 6px; font-weight: 600; font-size: 12px;
-  color: var(--muted); border-bottom: 2px solid #d1d5db; text-align: center; line-height: 1.3;
-}
-.likert thead th.col-num { width: 30px; }
-.likert thead th.col-opt { width: 95px; }
-.likert tbody td { padding: 8px 4px; border-bottom: 1px solid #f3f4f6; text-align: center; }
-.likert tbody td.col-text { text-align: left; }
-.likert tbody tr:hover { background: #fafbfe; }
-.likert .opt-sm {
-  display: inline-flex; align-items: center; gap: 2px; font-size: 11px; cursor: pointer;
-  padding: 5px 8px; border: 1.5px solid var(--border); border-radius: 14px;
-  transition: all .15s; user-select: none; background: #fafbfc; white-space: nowrap;
-}
-.likert .opt-sm:hover { border-color: #93c5fd; background: #f0f7ff; }
-.likert .opt-sm:has(input:checked) { background: #dbeafe; border-color: var(--blue); color: #1e40af; }
-.likert .opt-sm input { accent-color: var(--blue); }
-
-.btn-wrap { text-align: center; margin: 28px 0; }
-.btn {
-  display: inline-block; padding: 13px 56px; border: none; border-radius: 24px;
-  background: var(--blue); color: #fff; font-size: 15px; font-weight: 700;
-  cursor: pointer; transition: all .2s; font-family: inherit;
-}
-.btn:hover { opacity: .92; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(37,99,235,.3); }
-.btn:disabled { background: #9ca3af; cursor: not-allowed; transform: none; box-shadow: none; }
-
-.done { display: none; text-align: center; padding: 48px 20px; }
-.done .circle {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 64px; height: 64px; border-radius: 50%; background: #dbeafe;
-  font-size: 30px; margin-bottom: 14px; color: var(--blue);
-}
-.done h2 { font-size: 20px; color: var(--text); }
-.done p { color: var(--muted); margin-top: 6px; font-size: 14px; }
-
-.foot { text-align: center; font-size: 11px; color: #9ca3af; padding: 12px; }
-
-/* Error highlight */
-.q.error { background: #fef2f2; border-radius: 6px; padding-left: 8px; padding-right: 8px; }
-.q.error .q-label { color: var(--red); }
-
-@media (max-width: 520px) {
-  .container { padding: 10px 8px 32px; }
-  .card { padding: 18px 12px; border-radius: 10px; }
-  .header h1 { font-size: 18px; }
-  .opt { padding: 5px 10px; font-size: 12px; }
-  .likert { font-size: 11px; min-width: 560px; }
-  .likert .opt-sm { padding: 3px 5px; font-size: 10px; }
-  .likert thead th { font-size: 10px; }
+@media(max-width:520px) {
+  .container { padding:10px 8px 32px; }
+  .card { padding:18px 12px; border-radius:10px; }
+  .header h1 { font-size:18px; }
+  .opt { padding:5px 10px; font-size:12px; }
+  .li-opt { padding:5px 10px; font-size:11px; }
 }
 </style>
 </head>
 <body>
 
 <div class="container">
+
+<!-- ======== FORM WRAPPER ======== -->
+<div id="formWrapper">
 
 <div class="header">
   <h1>中青年冠心病患者社会疏离感现状及影响因素调查问卷</h1>
@@ -148,10 +120,11 @@ body {
   本调查旨在了解中青年冠心病患者的社会疏离感现状，为临床护理提供参考。问卷<strong>匿名填写，信息绝对保密</strong>，仅用于学术研究。答案无对错之分，请根据真实情况作答，约需 <strong>10～15分钟</strong>。感谢您！
 </div>
 
-<div class="progress-wrap">
+<!-- Progress -->
+<div class="progress-wrap" id="progressBox">
   <span style="font-size:11px;font-weight:600;color:var(--muted);">完成度</span>
   <div class="progress-bar"><div class="progress-fill" id="fill" style="width:0"></div></div>
-  <span class="progress-num" id="count">0 / 54</span>
+  <span class="progress-num" id="count">0 / 53</span>
 </div>
 
 <form id="form" novalidate>
@@ -198,8 +171,8 @@ body {
 <div class="q">
   <div class="q-label">21. 能否主动获取疾病相关知识？</div>
   <div class="opts">
-    <label class="opt"><input type="radio" name="info_seek" value="是" onchange="toggleSub('sub_info', true)">能</label>
-    <label class="opt"><input type="radio" name="info_seek" value="否" onchange="toggleSub('sub_info', false)">否</label>
+    <label class="opt"><input type="radio" name="info_seek" value="是" onchange="toggleSub('sub_info',true)">能</label>
+    <label class="opt"><input type="radio" name="info_seek" value="否" onchange="toggleSub('sub_info',false)">否</label>
   </div>
 </div>
 <div class="q" id="sub_info" style="display:none">
@@ -210,8 +183,8 @@ body {
 <div class="q">
   <div class="q-label">23. 能否获得社会支持？</div>
   <div class="opts">
-    <label class="opt"><input type="radio" name="social_support" value="是" onchange="toggleSub('sub_support', true)">能</label>
-    <label class="opt"><input type="radio" name="social_support" value="否" onchange="toggleSub('sub_support', false)">否</label>
+    <label class="opt"><input type="radio" name="social_support" value="是" onchange="toggleSub('sub_support',true)">能</label>
+    <label class="opt"><input type="radio" name="social_support" value="否" onchange="toggleSub('sub_support',false)">否</label>
   </div>
 </div>
 <div class="q" id="sub_support" style="display:none">
@@ -223,43 +196,47 @@ body {
 <!-- ===== 第二部分 GAS ===== -->
 <div class="card" id="section2">
 <h2><span class="tag">二</span> 一般疏离感量表（GAS）</h2>
-<div class="hint">请根据您的<strong>实际感受</strong>，选择最符合的选项。<span style="color:var(--red);">*</span> 每题必答</div>
-<div class="likert-wrap">
-<table class="likert" id="gasTable"><thead><tr><th class="col-num">#</th><th>题目</th><th class="col-opt">非常不同意</th><th class="col-opt">不同意</th><th class="col-opt">同意</th><th class="col-opt">非常同意</th></tr></thead><tbody></tbody></table>
-</div>
+<div class="hint">请根据<strong>实际感受</strong>选择最符合的选项。<span style="color:var(--red);">*</span> 每题必答</div>
+<div class="likert-header"><span>非常不同意</span><span>不同意</span><span>同意</span><span>非常同意</span></div>
+<div id="gasList"></div>
 </div>
 
 <!-- ===== 第三部分 GSES ===== -->
 <div class="card" id="section3">
 <h2><span class="tag">三</span> 一般自我效能感量表（GSES）</h2>
-<div class="hint">请根据您的<strong>实际感受</strong>，选择最符合的选项。<span style="color:var(--red);">*</span> 每题必答</div>
-<div class="likert-wrap">
-<table class="likert" id="gsesTable"><thead><tr><th class="col-num">#</th><th>题目</th><th class="col-opt">完全不正确</th><th class="col-opt">有点正确</th><th class="col-opt">多数正确</th><th class="col-opt">完全正确</th></tr></thead><tbody></tbody></table>
-</div>
+<div class="hint">请根据<strong>实际感受</strong>选择最符合的选项。<span style="color:var(--red);">*</span> 每题必答</div>
+<div class="likert-header"><span>完全不正确</span><span>有点正确</span><span>多数正确</span><span>完全正确</span></div>
+<div id="gsesList"></div>
 </div>
 
 <!-- ===== 第四部分 Family ===== -->
 <div class="card" id="section4">
 <h2><span class="tag">四</span> 家庭关怀度指数量表</h2>
-<div class="hint">请根据您对<strong>家人的实际感受</strong>，选择最符合的选项。<span style="color:var(--red);">*</span> 每题必答</div>
-<div class="likert-wrap">
-<table class="likert" id="famTable"><thead><tr><th class="col-num">#</th><th>题目</th><th class="col-opt">经常这样</th><th class="col-opt">有时这样</th><th class="col-opt">几乎很少</th></tr></thead><tbody></tbody></table>
-</div>
+<div class="hint">请根据对<strong>家人的实际感受</strong>选择最符合的选项。<span style="color:var(--red);">*</span> 每题必答</div>
+<div class="likert-header"><span>经常这样</span><span>有时这样</span><span>几乎很少</span></div>
+<div id="famList"></div>
 </div>
 
 </form>
 
 <div class="btn-wrap"><button class="btn" id="submitBtn" onclick="submitForm()">提交问卷</button></div>
 
-<div class="done" id="doneMsg">
-  <div class="circle">&#10003;</div>
-  <h2>提交成功</h2>
-  <p>衷心感谢您的配合！</p>
-  <p style="margin-top:12px;color:var(--text);line-height:2;">
-    愿您保持乐观心态，积极配合治疗<br>
-    祝您早日康复，回归美好生活<br>
-    每一天都充满阳光与希望
-  </p>
+</div><!-- /formWrapper -->
+
+<!-- ======== BLESSING PAGE ======== -->
+<div class="blessing" id="blessingPage">
+  <div class="card" style="max-width:500px;margin:0 auto;">
+    <div class="b-icon">&#128154;</div>
+    <h2>提交成功</h2>
+    <p style="color:var(--muted);">您的问卷编号</p>
+    <div class="b-code" id="surveyCode"></div>
+    <div class="b-msg">
+      愿您保持乐观心态，积极配合治疗<br>
+      祝您早日康复，回归美好生活<br>
+      每一天都充满阳光与希望
+    </div>
+    <div class="b-emoji">&#127803; &#127807; &#9728;&#65039; &#128150;</div>
+  </div>
 </div>
 
 <div class="foot">匿名调查 · 数据仅用于学术研究 · 河南医药大学</div>
@@ -267,14 +244,11 @@ body {
 </div>
 
 <script>
-function toggleSub(id, show) {
-  var el = document.getElementById(id);
-  if (el) el.style.display = show ? 'block' : 'none';
-}
+function toggleSub(id,show){ var el=document.getElementById(id); if(el)el.style.display=show?'block':'none'; }
 
-// ===== Render Likert tables =====
+// ===== Render Likert items as cards (no tables, no horizontal scroll) =====
 (function(){
-  var gasItems = [
+  var gasItems=[
     '我有时会感到我所认识的人，都并不怎么友善',
     '我觉得家人并不像我想要的那样与我亲近',
     '在大多数时间里，您都很难知道要怎么做，因为您不知道别人对自己的期望是什么',
@@ -291,8 +265,7 @@ function toggleSub(id, show) {
     '当我认识的人遇到问题时，我有责任去帮助他们',
     '我总是感觉我与其他朋友有很多的共同兴趣'
   ];
-
-  var gsesItems = [
+  var gsesItems=[
     '如果我尽力去做的话，我总是能够解决问题的',
     '即使别人反对我，我仍有办法取得我所要的',
     '对我来说，坚持理想和达成目标是轻而易举的',
@@ -304,8 +277,7 @@ function toggleSub(id, show) {
     '有麻烦的时候，我通常能想到一些应付的方法',
     '无论什么事在我身上发生，我都能应付自如'
   ];
-
-  var famItems = [
+  var famItems=[
     '当我遇到问题时，可以从家人得到满意的帮助',
     '我很满意家人与我讨论各种事情以及分担问题的方式',
     '当我希望从事新的活动或发展时，家人都能接受且给予支持',
@@ -313,52 +285,85 @@ function toggleSub(id, show) {
     '我很满意家人与我共度时光的方式'
   ];
 
-  var gasLabels = ['非常不同意','不同意','同意','非常同意'];
-  var gsesLabels = ['完全不正确','有点正确','多数正确','完全正确'];
-  var famLabels = ['经常这样','有时这样','几乎很少'];
-  var famValues = [2, 1, 0];
+  var gasLabels=['非常不同意','不同意','同意','非常同意'];
+  var gsesLabels=['完全不正确','有点正确','多数正确','完全正确'];
+  var famLabels=['经常这样','有时这样','几乎很少'];
+  var famValues=[2,1,0];
 
-  function fillTable(tbody, items, labels, prefix, values) {
-    items.forEach(function(text, i) {
-      var tr = document.createElement('tr');
-      var html = '<td style="text-align:center;font-weight:500;">'+(i+1)+'</td>';
-      html += '<td class="col-text">'+text+'</td>';
-      for (var j = 0; j < labels.length; j++) {
-        var val = (values && values[j] !== undefined) ? values[j] : (j+1);
-        html += '<td><label class="opt-sm">'+labels[j]+'<input type="radio" name="'+prefix+'_'+(i+1)+'" value="'+val+'" data-req="true"></label></td>';
+  function renderLikert(containerId, items, labels, prefix, values){
+    var container=document.getElementById(containerId);
+    items.forEach(function(text,i){
+      var div=document.createElement('div');
+      div.className='likert-item';
+      div.setAttribute('data-req','true');
+      var html='<div class="li-row">';
+      html+='<span class="li-num">'+(i+1)+'.</span>';
+      html+='<div class="li-content">';
+      html+='<div class="li-text">'+text+'</div>';
+      html+='<div class="li-opts">';
+      for(var j=0;j<labels.length;j++){
+        var val=(values&&values[j]!==undefined)?values[j]:(j+1);
+        html+='<label class="li-opt">'+labels[j]+'<input type="radio" name="'+prefix+'_'+(i+1)+'" value="'+val+'" data-req="true"></label>';
       }
-      tr.innerHTML = html;
-      tbody.appendChild(tr);
+      html+='</div></div></div>';
+      div.innerHTML=html;
+      container.appendChild(div);
     });
   }
 
-  fillTable(document.querySelector('#gasTable tbody'), gasItems, gasLabels, 'gas');
-  fillTable(document.querySelector('#gsesTable tbody'), gsesItems, gsesLabels, 'gses');
-  fillTable(document.querySelector('#famTable tbody'), famItems, famLabels, 'fam', famValues);
+  renderLikert('gasList', gasItems, gasLabels, 'gas');
+  renderLikert('gsesList', gsesItems, gsesLabels, 'gses');
+  renderLikert('famList', famItems, famLabels, 'fam', famValues);
 })();
 
-// ===== Build a map of required group name -> label =====
-function buildReqMap() {
+// ===== Progress: count ALL radio groups + text inputs =====
+// Radio groups: 21 (section1) + 15 (gas) + 10 (gses) + 5 (fam) = 51 radio groups
+// Text inputs: height, weight = 2
+// TOTAL = 53
+
+var TOTAL_ITEMS = 53;
+
+function calcProgress() {
+  var checkedGroups = {};
+  document.querySelectorAll('input[type="radio"]:checked').forEach(function(r){
+    checkedGroups[r.name] = true;
+  });
+  var radioDone = Object.keys(checkedGroups).length;
+
+  var h = document.querySelector('input[name="height"]');
+  var w = document.querySelector('input[name="weight"]');
+  var textDone = (h && h.value ? 1 : 0) + (w && w.value ? 1 : 0);
+
+  return radioDone + textDone;
+}
+
+document.addEventListener('change', updateProgress);
+function updateProgress(){
+  var done = calcProgress();
+  var pct = Math.min(Math.round(done / TOTAL_ITEMS * 100), 100);
+  document.getElementById('fill').style.width = pct + '%';
+  document.getElementById('count').textContent = done + ' / ' + TOTAL_ITEMS;
+}
+
+// ===== Build required-group -> label map =====
+function buildReqMap(){
   var map = {};
-  var allReq = document.querySelectorAll('input[data-req="true"]');
-  allReq.forEach(function(r) {
+  document.querySelectorAll('input[data-req="true"]').forEach(function(r){
     if (map[r.name]) return;
     var label = r.name;
-    // Try to find label from .q container
     var qDiv = r.closest('.q');
     if (qDiv) {
       var lbl = qDiv.querySelector('.q-label');
-      if (lbl) label = lbl.textContent.replace(/\*/g, '').trim();
+      if (lbl) label = lbl.textContent.replace(/\*/g,'').trim();
     }
-    // For Likert, find card title + item number
     if (!qDiv) {
-      var card = r.closest('.card');
-      if (card) {
-        var h2 = card.querySelector('h2');
-        if (h2) {
-          var parts = r.name.split('_');
-          label = h2.textContent.trim() + ' 第' + parts[parts.length-1] + '题';
-        }
+      var li = r.closest('.likert-item');
+      if (li) {
+        var card = li.closest('.card');
+        var numEl = li.querySelector('.li-num');
+        var num = numEl ? numEl.textContent.replace('.','') : '';
+        var cardTitle = card ? card.querySelector('h2').textContent.trim() : '';
+        label = cardTitle + ' 第' + num + '题';
       }
     }
     map[r.name] = label;
@@ -366,86 +371,74 @@ function buildReqMap() {
   return map;
 }
 
-// ===== Progress =====
-document.addEventListener('change', updateProgress);
-function updateProgress() {
-  var total = 54;
-  var checked = document.querySelectorAll('input[type="radio"]:checked').length;
-  var h = document.querySelector('input[name="height"]');
-  if (h && h.value) checked++;
-  var w = document.querySelector('input[name="weight"]');
-  if (w && w.value) checked++;
-
-  var pct = Math.min(Math.round(checked / total * 100), 100);
-  document.getElementById('fill').style.width = pct + '%';
-  document.getElementById('count').textContent = Math.min(checked, total) + ' / ' + total;
-}
-
 // ===== Submit =====
-function submitForm() {
+function submitForm(){
   var reqMap = buildReqMap();
-  var missing = [];
-
-  // Check all required radio groups
   var checkedGroups = {};
-  document.querySelectorAll('input[type="radio"]:checked').forEach(function(r) {
+  document.querySelectorAll('input[type="radio"]:checked').forEach(function(r){
     checkedGroups[r.name] = true;
   });
 
-  // Get all required groups (from data-req)
   var allGroups = {};
-  document.querySelectorAll('input[data-req="true"]').forEach(function(r) {
+  document.querySelectorAll('input[data-req="true"]').forEach(function(r){
     allGroups[r.name] = true;
   });
 
-  Object.keys(allGroups).forEach(function(name) {
+  var missing = [];
+  Object.keys(allGroups).forEach(function(name){
     if (!checkedGroups[name]) {
       missing.push({ name: name, label: reqMap[name] || name });
     }
   });
 
+  // Check age is still a required radio now, so this is auto-covered
+  // But we have no number-required items to check separately
+
   // Clear errors
-  document.querySelectorAll('.q.error').forEach(function(q) { q.classList.remove('error'); });
+  document.querySelectorAll('.q.error,.likert-item.error').forEach(function(el){ el.classList.remove('error'); });
 
   if (missing.length > 0) {
-    // Highlight errors
-    missing.forEach(function(m) {
+    missing.forEach(function(m){
       var el = document.querySelector('input[name="'+m.name+'"]');
       if (el) {
-        var qDiv = el.closest('.q');
-        if (qDiv) qDiv.classList.add('error');
+        var container = el.closest('.q') || el.closest('.likert-item');
+        if (container) container.classList.add('error');
       }
     });
-
     var msg = '以下 ' + missing.length + ' 道必答题尚未完成：\n\n';
-    missing.forEach(function(m, i) {
-      msg += (i+1) + '. ' + m.label + '\n';
-    });
+    missing.forEach(function(m,i){ msg += (i+1) + '. ' + m.label + '\n'; });
     alert(msg);
-
-    // Scroll to first missing
     var first = document.querySelector('input[name="'+missing[0].name+'"]');
     if (first) {
       var card = first.closest('.card');
-      if (card) card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      if (card) card.scrollIntoView({ behavior:'smooth', block:'center' });
     }
     return;
   }
 
-  // Success
-  document.getElementById('submitBtn').style.display = 'none';
-  document.getElementById('doneMsg').style.display = 'block';
-  document.getElementById('doneMsg').scrollIntoView({ behavior: 'smooth' });
+  // Generate survey code
+  var now = new Date();
+  var code = 'CHD-' +
+    now.getFullYear() +
+    String(now.getMonth()+1).padStart(2,'0') +
+    String(now.getDate()).padStart(2,'0') + '-' +
+    String(Math.floor(Math.random()*9000)+1000);
+  document.getElementById('surveyCode').textContent = code;
 
-  // Log data
-  var data = {};
-  document.querySelectorAll('#form input:checked').forEach(function(el) {
+  // Collect data
+  var data = { code: code };
+  document.querySelectorAll('#form input:checked').forEach(function(el){
     data[el.name] = data[el.name] ? data[el.name] + ',' + el.value : el.value;
   });
-  document.querySelectorAll('#form input[type="number"]').forEach(function(el) {
+  document.querySelectorAll('#form input[type="number"]').forEach(function(el){
     if (el.value) data[el.name] = el.value;
   });
   console.log('问卷数据:', JSON.stringify(data, null, 2));
+
+  // Hide form, show blessing
+  document.getElementById('formWrapper').style.display = 'none';
+  document.getElementById('blessingPage').style.display = 'block';
+  document.getElementById('blessingPage').scrollIntoView({ behavior:'smooth' });
 }
 
 updateProgress();
