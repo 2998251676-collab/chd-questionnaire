@@ -163,7 +163,7 @@ body {
 
 <div class="q" data-req="true"><div class="q-label">1. 性别<span class="req">*</span></div><div class="opts"><label class="opt"><input type="radio" name="gender" value="男" data-req="true">男</label><label class="opt"><input type="radio" name="gender" value="女" data-req="true">女</label></div></div>
 
-<div class="q" data-req="true"><div class="q-label">2. 年龄<span class="req">*</span></div><div class="inline"><input type="number" name="age" min="18" max="60" placeholder="18～60" data-req="true"> <span class="unit">岁</span></div></div>
+<div class="q" data-req="true"><div class="q-label">2. 年龄<span class="req">*</span></div><div class="opts"><label class="opt"><input type="radio" name="age" value="18～30岁" data-req="true">18～30岁</label><label class="opt"><input type="radio" name="age" value="31～40岁" data-req="true">31～40岁</label><label class="opt"><input type="radio" name="age" value="41～50岁" data-req="true">41～50岁</label><label class="opt"><input type="radio" name="age" value="51～60岁" data-req="true">51～60岁</label></div></div>
 
 <div class="q"><div class="q-label">3. 身高 & 体重</div><div class="inline"><input type="number" name="height" min="100" max="250" placeholder="身高"> <span class="unit">cm</span> <input type="number" name="weight" min="30" max="200" placeholder="体重"> <span class="unit">kg</span> <span style="font-size:12px;color:var(--muted);">（BMI 由调查员计算）</span></div></div>
 
@@ -358,8 +358,6 @@ function buildReqMap() {
     }
     map[r.name] = label;
   });
-  // Add age
-  map['age'] = '年龄';
   return map;
 }
 
@@ -368,8 +366,6 @@ document.addEventListener('change', updateProgress);
 function updateProgress() {
   var total = 54;
   var checked = document.querySelectorAll('input[type="radio"]:checked').length;
-  var ageEl = document.querySelector('input[name="age"]');
-  if (ageEl && ageEl.value && ageEl.value >= 18 && ageEl.value <= 60) checked++;
   var h = document.querySelector('input[name="height"]');
   if (h && h.value) checked++;
   var w = document.querySelector('input[name="weight"]');
@@ -402,14 +398,6 @@ function submitForm() {
       missing.push({ name: name, label: reqMap[name] || name });
     }
   });
-
-  // Check age
-  var ageEl = document.querySelector('input[name="age"]');
-  if (!ageEl.value || ageEl.value < 18 || ageEl.value > 60) {
-    if (!missing.some(function(m) { return m.name === 'age'; })) {
-      missing.push({ name: 'age', label: '年龄' });
-    }
-  }
 
   // Clear errors
   document.querySelectorAll('.q.error').forEach(function(q) { q.classList.remove('error'); });
